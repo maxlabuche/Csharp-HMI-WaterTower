@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6574EF74-1D35-41F9-8B5B-6B4B5B721520}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HmiWaterTower</RootNamespace>
+    <AssemblyName>HmiWaterTower</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CAbout.Designer.cs">
+      <DependentUpon>CAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CConnectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CConnectionDialog.designer.cs">
+      <DependentUpon>CConnectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CGUI.designer.cs">
+      <DependentUpon>CGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="COPCProxy.cs" />
+    <Compile Include="COPCProxy.Items.cs" />
+    <Compile Include="GlobalRc1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalRc.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CAbout.resx">
+      <DependentUpon>CAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CConnectionDialog.resx">
+      <DependentUpon>CConnectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CGUI.resx">
+      <DependentUpon>CGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRc.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalRc1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TState.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="SAOFSGRPXLib">
+      <Guid>{477AB665-8618-11D2-BC7F-006097801B04}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dotnet-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\illustrator2017-large-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\InfoBar-HmiSchneider-background_export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_GEII_sigle_blanc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_IUT_Annecy_BLANC_RVB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo_USMB_2015_rvb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-help%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-help%400.5x_20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-help%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-help%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-link%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-link%400.5x_20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-link%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-link%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-link-missing%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-link-missing%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-link-missing%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-refresh%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-refresh%400.5x_20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-refresh%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-refresh%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-blue%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-blue%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-blue%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-green%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-green%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-green%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-grey%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-grey%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-grey%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-orange%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-orange%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-orange%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-red%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-red%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-round-red%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning-critical-red%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning-critical-red%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning-critical-red%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning-critical-white%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning-critical-white%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning-critical-white%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning-disabled%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning-disabled%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning-disabled%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning-full%400.5x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning-full%400.75x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-warning-full%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\process-vue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\process-vue%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\process-vue%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\process-vue-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\process-vue-white%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\process-vue-white%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\schneider-electric-large-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\telemecanique-large-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vs2012-large-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-link%4020px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-refresh%4020px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_GEII_sigle_rvb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_IUT_Annecy_RVB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picto-help%4020px.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

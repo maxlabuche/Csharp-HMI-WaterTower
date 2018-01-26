@@ -1,0 +1,229 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Threading;
+using SAOFSGRPXLib;
+
+namespace HmiWaterTower
+{
+    public partial class COPCProxy
+    {
+        #region Objects
+
+        private SAOFSGroupXClass mOPCGroup;
+
+        private TState mConnectionState;
+        private string sOPCServerName;
+        private string sPLCAlias;
+        private int iWatchTime; // time in ms (200ms, 500ms, 1s, 2s, 100s, 250s, 500s, 1000s)
+
+        public event EventHandler StateChange;
+        public event EventHandler DataChange;
+
+        #endregion
+
+
+        /// <summary>
+        /// Builder of OPC Proxy (no parameters needed)
+        /// </summary>
+        public COPCProxy()
+        {
+            mConnectionState = TState.DISCONNECTED;
+            sOPCServerName = null;
+            sPLCAlias = null;
+            iWatchTime = 2000;
+        }
+
+        #region OPC Proxy management
+
+        // OFS Properties //
+
+        public TState ConnectionState
+        {
+            get
+            {
+                TState rState = this.mConnectionState;
+                return rState;
+            }
+        }
+
+        public string OpcServerName
+        {
+            get
+            {
+                return sOPCServerName;
+            }
+        }
+
+        public string PlcAlias
+        {
+            get
+            {
+                return sPLCAlias;
+            }
+        }
+
+        public int WatchTime
+        {
+            get
+            {
+                return iWatchTime;
+            }
+        }
+
+        // Commands //
+
+        public void Connect(string psOpcServerName, string psPlcAlias, int piWatchTime)
+        {
+            if (this.mConnectionState == TState.DISCONNECTED)
+            {
+                this.ChangeConnectionState(TState.CONNECTING);
+                this.sOPCServerName = psOpcServerName;
+                this.sPLCAlias = psPlcAlias;
+                this.iWatchTime = piWatchTime;
+                try
+                {
+                    //Thread.Sleep(2000); // for debugging without OFS
+
+                    mOPCGroup = new SAOFSGroupXClass();
+                    mOPCGroup.Init(this.sOPCServerName, "");
+                    this.mAddAllItems();
+                    mOPCGroup.OnDataChange += new _ISAOPCGrpXCallback_OnDataChangeEventHandler(mOPCGroup_OnOpcDataChange);
+                    mOPCGroup.Start(piWatchTime);
+
+                    this.ChangeConnectionState(TState.CONNECTED);
+                }
+                catch (Exception ex)
+                {
+                    ManageErrorConnection(ex.Message);
+                }
+            }
+        }
+
+        public void Disconnect()
+        {
+            if ((this.mConnectionState == TState.CONNECTED) || (this.mConnectionState == TState.CONNECTING))
+            {
+                try
+                {
+                    mOPCGroup.Stop();
+                }
+                catch { }
+                if (mOPCGroup != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(mOPCGroup);
+                }
+                mOPCGroup = null;
+                this.sOPCServerName = null;
+                this.sPLCAlias = null;
+                this.ChangeConnectionState(TState.DISCONNECTED);
+            }
+        }
+
+        private void ChangeConnectionState(TState nextState)
+        {
+            TState previousState = this.mConnectionState;
+            this.mConnectionState = nextState;
+            if (nextState != previousState)
+            {
+                this.sendEvent_StateChange();
+            }
+        }
+
+        private void ManageErrorConnection(string sErrorMessage)
+        {
+            //this.Disconnect();
+            MessageBox.Show(
+                "An error as occured while trying to connect.\nCheck your OFS server.\n\nDetails:\n" + sErrorMessage,
+                "Connection failed",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+                );
+            this.Disconnect();
+        }
+
+        #endregion
+
+
+        #region PLC I/O management
+
+        private void mAddItem(string psItemName)
+        {
+            mOPCGroup.AddItem(" ", this.sPLCAlias + "!" + psItemName);
+        }
+
+        private void mWriteValue(string psItemName, object psValue)
+        {
+            try
+            {
+                mOPCGroup.Write(this.sPLCAlias + "!" + psItemName, psValue);
+            }
+            catch (Exception ex)
+            {
+                ManageErrorConnection(ex.Message);
+            }
+        }
+
+        private object mGetValue(string psItemName)
+        {
+            object obj = null;
+            obj = mOPCGroup.GetValue(this.sPLCAlias + "!" + psItemName);
+            return obj;
+        }
+
+        #endregion
+
+
+        #region Events management
+
+        private void sendEvent_StateChange()
+        {
+            if (this.StateChange != null)
+            {
+                this.StateChange(this, new EventArgs());
+                System.Windows.Forms.Application.DoEvents();
+            }
+        }
+
+        private void sendEvent_DataChange()
+        {
+            if (this.DataChange != null)
+            {
+                this.DataChange(this, new EventArgs());
+                System.Windows.Forms.Application.DoEvents();
+            }
+        }
+
+        public void askForNewValues()
+        {
+            try
+            {
+                if (mConnectionState == TState.CONNECTED)
+                {
+                    mOPCGroup.Read();
+                    this.mGetAllValues();
+                    sendEvent_DataChange();
+                }
+            }
+            catch (Exception ex)
+            {
+                ManageErrorConnection(ex.Message);
+            }
+        }
+
+        public void mOPCGroup_OnOpcDataChange()
+        {
+            askForNewValues();
+        }
+
+        public void mWatchingTimer_OnTick(object sender, EventArgs e)
+        {
+            askForNewValues();
+        }
+
+        #endregion
+
+    }
+}

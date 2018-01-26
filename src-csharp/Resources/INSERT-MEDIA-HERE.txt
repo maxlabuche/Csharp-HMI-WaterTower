@@ -1,0 +1,14 @@
+Insert all media files from:
+- Open-media-for-HMI
+- Trademark-Logos
+
+in this directory.
+
+DO NOT MAKE SUBFOLDERS BEFORE OPEN THE PROJECT FOR THE FIRST TIME.
+ALL FILES MUST BE IN THIS FOLDER.
+
+
+
+Open media are done by Maxime MARMONT and are licensed under the Creative Commons Attribution Share Alike 4.0 license.
+
+Trademark logos are under the ownership and license of their respectful companies/universities.
