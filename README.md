@@ -27,7 +27,7 @@ This application, with a graphical user interface (GUI), is built on MVC model, 
 ### Technologies and models used
 1. **Model**: the machine is composed of a pump (with its speed variator from Telemecanique) and a PLC from Schneider. The PLC, coded with a Grafcet or Ladder language, can control the hardware of the machine. So, our application will be able to communicate with the PLC through an OFS server thanks to a COM object (here SAOFSGRPXLib), working with .NET framework
   
-2. **View**: this is our graphical user interface, so what the user see and where he can act
+2. **View**: this is my graphical user interface, so what the user see and where he can act
   
 3. **Controller**: this is the main part of the application, because this is the interface between the interface and the hardware controller. Here it's called the OPC Proxy. When a variable is updated from the sensor, the PLC send it to the OFS server, then the OPC Proxy get this value and send it to the UI where finally the user can see it, as a number, a light, a color, a text, a sound, etc.
   
@@ -102,6 +102,11 @@ So to be able to test all the features of my program, open it in IUT Annecy (Fre
   
 3. Put all media files from `/media/*` into `/src/Resources`.  
 **All resource files must be in this directory before opening the project, DO NOT MAKE SUBFOLDERS INTO THIS BEFORE OPENING FOR THE FIRST TIME.**
+  
+> **Note:** All pictograms I created are included in this software, and are provided for free.  
+> If you want to use them with your own software, please respect the license (you can find it near to the image files) and name the original copyright.  
+> Also, you do not have the right to sell them, you have to provide them for free only.  
+> Thank you for your understanding.  
   
 4. Open `HmiWaterTower.sln` (in `/src-csharp/`) in *Microsoft Visual Studio*. If you are not using this IDE, you can import all ".cs" files and "Resources" directory in a new "C#/.NET with GUI" project.
   
