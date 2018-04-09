@@ -15,7 +15,7 @@ This project is intended for Object Oriented Programming learning, especially ev
 For this project, we have an industrial PLC (Programmable Logic Controller) from Schneider Electric which is able to control a model of a water tower.
 
 Here an image showing the real model:  
-![Water tower model](/images/WaterTowerModel.jpg)
+![Water tower model](/images/WaterTowerModel-w.jpg)
 
 The goal is to build a C#/.NET Windows application to control this machine and have a feedback on the overall operation of the machine. This principle is called supervision.  
 
